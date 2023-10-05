@@ -10,4 +10,4 @@ def mul(a, b):
     return (c)
 def div(a, b):
     c = a / b
-    return (c)
+    return int((c))
