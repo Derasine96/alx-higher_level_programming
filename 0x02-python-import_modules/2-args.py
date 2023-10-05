@@ -10,6 +10,8 @@ def print_arg(argv):
         print("{} arguments:".format(len(argv)))
         for i, arg in enumerate(argv, 1):
             print("{}: {}".format(i, arg))
+
+
 if __name__ == "__main__":
     import sys
     arguments = sys.argv[1:]
