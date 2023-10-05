@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 import magic_calculation_102
+
+
 def magic_calculation(a, b):
     if a < b:
         result = a + b
