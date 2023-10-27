@@ -1,0 +1,83 @@
+Matrix Division Function
+=======================
+
+This is an example test file for the `matrix_divided` function.
+
+Import the `matrix_divided` function from the `my_module` module:
+
+.. code-block:: python
+
+    >>> matrix_divided = __import__('2-matrix_divided').matrix_divided
+
+Perform matrix division:
+
+.. code-block:: python
+
+    # Test a simple matrix division
+    >>> matrix_divided([[10, 6, 3], [4, 9, 5]], 4)
+    [[2.5, 1.5, 0.75], [1.0, 2.25, 1.25]]
+
+    # Test when any index of the list has a negative value
+    >>> matrix_divided([[-1, 4, -3], [-4, 9, 8]], 4)
+    [[-0.25, 1.0, -0.75], [-1.0, 2.25, 2.0]]
+
+    # Test when any index of the list is zero or less than zero
+    >>> matrix_divided([[0, 20, 28], [0, 16, 120]], 4)
+    [[0.0, 5.0, 7.0], [0.0, 4.0, 30.0]]
+
+    # Test for rounding to two decimal places
+    >>> matrix_divided([[10, 20, 30], [40, 50, 60]], 7)
+    [[1.43, 2.86, 4.29], [5.71, 7.14, 8.57]]
+
+    # Test for list with float values
+    >>> matrix_divided([[10.5, 20.5, 30.5], [40.5, 17.4, 10.9]], 5)
+    [[2.1, 4.1, 6.1], [8.1, 3.48, 2.18]]
+
+    # Test for div with float value
+    >>> matrix_divided([[4, 17, 34], [12, 2, 9]], 1.5)
+    [[2.67, 11.33, 22.67], [8.0, 1.33, 6.0]]
+
+Handling Errors
+---------------
+
+The function handles various errors:
+
+.. code-block:: python
+
+    # Test for invalid data type (string instead of int or float)
+    >>> matrix_divided([["a", "b", "c"], ["d", "e", "f"]], 4)
+    Traceback (most recent call last):
+    ...
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+.. code-block:: python
+
+    # Test for non-integer or float div
+    >>> matrix_divided([[10, 6, 3], [4, 9, 5]], 'four')
+    Traceback (most recent call last):
+    ...
+    TypeError: div must be a number
+
+.. code-block:: python
+
+    # Test for empty matrix
+    >>> matrix_divided([[]])
+    Traceback (most recent call last):
+    ...
+    TypeError: matrix_divided() missing 1 required positional argument: 'div'
+
+.. code-block:: python
+
+    # Test for unequal size of matrix
+    >>> matrix_divided([[10, 6, 3], [4, 9, 5, 1]]) # doctest: +IGNORE_EXCEPTION_DETAIL
+    Traceback (most recent call last):
+    ...
+    TypeError: Each row of the matrix must have the same size
+
+.. code-block:: python
+
+    # Test for div equal to zero
+    >>> matrix_divided([[10, 6, 3], [4, 9, 5]], 0)
+    Traceback (most recent call last):
+    ...
+    ValueError: Divisor cannot be zero
