@@ -1,0 +1,74 @@
+The ``text_indentation`` module
+===========================
+
+This module provides the ``text_indentation`` function for printing
+a text with 2 new lines after selected characters.
+Selected characters(. ? :)
+
+Using ``text_indentation(text)`` 
+------------------------
+  
+First import ``text_indentation()``:
+
+    >>> text_indentation = __import__('5-text_indentation').text_indentation
+    
+Then use it:
+
+    
+Print a short sentence with .
+
+    >>> text_indentation("Hello, World. My name is Chidex") # doctest: +NORMALIZE_WHITESPACE
+    Hello, World.
+    My name is Chidex
+   
+Print a long sentence with .
+
+    >>> text_indentation("Hello, World. My name is Chidex")  # doctest: +NORMALIZE_WHITESPACE
+    Hello, World.
+    My name is Chidex
+
+    >>> text_indentation("This is a very long sentence. It has been written by me to test this program."
+    ...                  "It contains many words and sentences so it can be used as an example of how to use this program.")  # doctest: +NORMALIZE_WHITESPACE
+    This is a very long sentence.
+    It has been written by me to test this program.
+    It contains many words and sentences so it can be used as an example of how to use this program.
+
+    >>> text_indentation("Hello, Do I know you? You look so familiar. My name is Chidex")  # doctest: +NORMALIZE_WHITESPACE
+    Hello, Do I know you?
+    You look so familiar.
+    My name is Chidex
+
+    >>> text_indentation("Hello, Do I know you? You look so familiar: My name is Chidex")  # doctest: +NORMALIZE_WHITESPACE
+    Hello, Do I know you?
+    You look so familiar:
+    My name is Chidex
+
+
+Invalid text values:
+
+    >>> text_indentation(5)
+    Traceback (most recent call last):
+    ...
+    TypeError: text must be a string
+    
+    >>> text_indentation(1.5)
+    Traceback (most recent call last):
+    ...
+    TypeError: text must be a string
+
+
+Edge cases:
+
+    >>> text_indentation("This is a sentence without delimiters")  
+    This is a sentence without delimiters
+
+    >>> text_indentation("Line 1\nLine 2\n")  # doctest: +NORMALIZE_WHITESPACE
+    Line 1
+    Line 2
+
+    >>> text_indentation("")  # This test case should have no output, or you can represent it as an empty string if you want
+
+    >>> text_indentation(" ")  # This test case should have no output
+
+    >>> text_indentation("")
+    >>> text_indentation(" ")
