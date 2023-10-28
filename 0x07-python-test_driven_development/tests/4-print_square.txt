@@ -1,0 +1,62 @@
+The ``print_square`` module
+===========================
+
+This module provides the ``print_square()`` function for printing squares.
+
+Using ``print_square()`` 
+------------------------
+  
+First import ``print_square()``:
+
+    >>> print_square = __import__('4-print_square').print_square
+
+Print a 5x5 square:
+
+    >>> print_square(5)
+    #####
+    #####
+    #####
+    #####
+    #####
+
+Print a 2x2 square:
+    
+    >>> print_square(2)
+    ##
+    ##
+
+Invalid size values:
+
+    >>> print_square('five')
+    Traceback (most recent call last):
+    ...
+    TypeError: size must be an integer
+
+    >>> print_square(-1)
+    Traceback (most recent call last):
+    ...
+    ValueError: size must be >= 0
+
+    >>> print_square(2.5)
+    Traceback (most recent call last):
+    ...
+    TypeError: size must be an integer
+
+    >>> print_square(None)
+    Traceback (most recent call last):
+    ...
+    TypeError: size must be an integer
+
+Edge cases:
+
+    >>> print_square(0)
+
+    >>> print_square(None)
+    Traceback (most recent call last):
+    ...
+    TypeError: size must be an integer
+  
+    >>> print_square("")
+    Traceback (most recent call last):
+    ...
+    TypeError: size must be an integer
