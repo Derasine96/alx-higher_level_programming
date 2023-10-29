@@ -19,29 +19,37 @@ Print a short sentence with .
 
     >>> text_indentation("Hello, World. My name is Chidex") # doctest: +NORMALIZE_WHITESPACE
     Hello, World.
+    <BLANKLINE>
     My name is Chidex
+    <BLANKLINE>
    
 Print a long sentence with .
 
-    >>> text_indentation("Hello, World. My name is Chidex")  # doctest: +NORMALIZE_WHITESPACE
-    Hello, World.
-    My name is Chidex
 
     >>> text_indentation("This is a very long sentence. It has been written by me to test this program."
     ...                  "It contains many words and sentences so it can be used as an example of how to use this program.")  # doctest: +NORMALIZE_WHITESPACE
     This is a very long sentence.
+    <BLANKLINE>
     It has been written by me to test this program.
+    <BLANKLINE>
     It contains many words and sentences so it can be used as an example of how to use this program.
+    <BLANKLINE>
 
     >>> text_indentation("Hello, Do I know you? You look so familiar. My name is Chidex")  # doctest: +NORMALIZE_WHITESPACE
     Hello, Do I know you?
+    <BLANKLINE>
     You look so familiar.
+    <BLANKLINE>
     My name is Chidex
+    <BLANKLINE>
 
     >>> text_indentation("Hello, Do I know you? You look so familiar: My name is Chidex")  # doctest: +NORMALIZE_WHITESPACE
     Hello, Do I know you?
+    <BLANKLINE>
     You look so familiar:
+    <BLANKLINE>
     My name is Chidex
+    <BLANKLINE>
 
 
 Invalid text values:
@@ -56,7 +64,15 @@ Invalid text values:
     ...
     TypeError: text must be a string
 
+    >>> text_indentation(["Hello", "world"])
+    Traceback (most recent call last):
+    TypeError: text must be a string
 
+    >>> text_indentation(None)
+    Traceback (most recent call last):
+    TypeError: text must be a string
+
+    
 Edge cases:
 
     >>> text_indentation("This is a sentence without delimiters")  
@@ -66,9 +82,16 @@ Edge cases:
     Line 1
     Line 2
 
-    >>> text_indentation("")  # This test case should have no output, or you can represent it as an empty string if you want
-
-    >>> text_indentation(" ")  # This test case should have no output
+    >>> text_indentation("   Hi there.")
+    Hi there.
+    <BLANKLINE>
 
     >>> text_indentation("")
     >>> text_indentation(" ")
+
+    >>> text_indentation("\n\n\n I am testing newlines first.")
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+    I am testing newlines first.
+    <BLANKLINE>

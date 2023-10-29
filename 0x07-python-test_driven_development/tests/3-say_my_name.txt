@@ -9,8 +9,7 @@ Using ``say_my_name()``
 First import ``say_my_name()``:
 
     >>> say_my_name = __import__('3-say_my_name').say_my_name
-
-Say my name:
+Now using it:
 
     >>> say_my_name("Chidera")
     My name is Chidera
