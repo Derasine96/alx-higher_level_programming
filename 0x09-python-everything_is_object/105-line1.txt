@@ -1,0 +1,2 @@
+0
+No small integer objects in the range -5 to 256 have been created and are still in memory because the code does not involve any operations that require the creation of integer objects within that range
