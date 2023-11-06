@@ -4,7 +4,7 @@
 
 def lookup(obj):
     """Returns a list
-    
+
     Arg:
         obj(object): object to be listed
     """
