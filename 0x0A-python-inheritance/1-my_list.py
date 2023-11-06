@@ -9,10 +9,11 @@ class MyList(list):
         Args:
             args (list): List of numbers to initialize the MyList with
         """
-    def print_sorted(self):
-        """Prints a list of numbers in sorted order"""
         if not all(isinstance(num, int) for num in self):
             raise TypeError("All elements of the list must be integers")
-        copy = self[:]
-        copy.sort()
-        print(copy)
+        super().__init__(args)
+
+    def print_sorted(self):
+        """Prints a list of numbers in sorted order"""
+        sorted_list = sorted(self)
+        print(sorted_list)
