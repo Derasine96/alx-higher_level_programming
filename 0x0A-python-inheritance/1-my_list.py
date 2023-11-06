@@ -9,7 +9,7 @@ class MyList(list):
         Args:
             args (list): List of numbers to initialize the MyList with
         """
-        if not all(isinstance(num, int) for num in self):
+        if not all(isinstance(num, int) for num in args):
             raise TypeError("All elements of the list must be integers")
         super().__init__(args)
 
