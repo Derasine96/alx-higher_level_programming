@@ -3,15 +3,14 @@
 
 
 class MyList(list):
-    def __init__(self, *args):
+    """a subclass of list"""
+    def __init__(self):
         """Initialize a MyList by inheriting from list
 
         Args:
             args (list): List of numbers to initialize the MyList with
         """
-        if not all(isinstance(num, int) for num in args):
-            raise TypeError("All elements of the list must be integers")
-        super().__init__(args)
+        super().__init__()
 
     def print_sorted(self):
         """Prints a list of numbers in sorted order"""
