@@ -2,7 +2,7 @@
 """Defines a text file-creating and writing function"""
 
 
-def write_file(filename="", text=""):
+def append_write(filename="", text=""):
     """Appends a string to a text file UTF8
 
     Args:
