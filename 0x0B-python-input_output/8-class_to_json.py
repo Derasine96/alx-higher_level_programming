@@ -15,5 +15,3 @@ def class_to_json(obj):
             if isinstance(value, (list, dict, str, int, bool)):
                 serialized_data[name] = value
         return serialized_data
-    else:
-        raise ValueError("Input must be an instance of a class, not the class")
