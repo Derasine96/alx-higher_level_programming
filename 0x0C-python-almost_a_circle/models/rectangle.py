@@ -80,6 +80,19 @@ class Rectangle(Base):
         for _ in range(self.__height):
             print(' ' * self.__x + '#' * self.__width)
 
+    def update(self, *args):
+        """Assigns an argument to each attribute"""
+        num_args = len(args)
+        if num_args == 1:
+            self.id = args[0]
+        elif len(args) in {2, 3, 4}:
+            arg = [self.id, self.__width, self.__height, self.__x, self.__y]
+            for i in range(min(len(args), 5)):
+                arg[i] = args[i]
+                self.id, self.__width, self.__height, self.__x, self.__y = arg
+        elif num_args == 5:
+            self.id, self.__width, self.__height, self.__x, self.__y = args
+
     def __str__(self):
         """Return the str() representation of a Rectangle."""
         return (f"[{self.__class__.__name__}] ({self.id}) "
