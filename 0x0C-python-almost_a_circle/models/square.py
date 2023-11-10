@@ -26,8 +26,23 @@ class Square(Rectangle):
         return (f"[{self.__class__.__name__}] ({self.id}) "
                 f"{self.x}/{self.y} - {self.width}")
 
-        def update(self, *args, **kwargs):
-            """Assigns an argument to each attribute"""
+    @property
+    def size(self):
+        """Getter for the width of the square."""
+        return self.width
+
+    @size.setter
+    def size(self, value):
+        """Setter for the widthe of the square."""
+        if not isinstance(value, int):
+            raise TypeError("width must be an integer")
+        elif value <= 0:
+            raise ValueError("width must be > 0")
+        self.width = value
+        self.height = value
+
+    def update(self, *args, **kwargs):
+        """Assigns an argument to each attribute"""
         if args:
             if len(args) == 1:
                 self.id = args[0]
