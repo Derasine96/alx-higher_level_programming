@@ -46,13 +46,13 @@ class Square(Rectangle):
         if args:
             if len(args) == 1:
                 self.id = args[0]
-            elif len(args) in {2, 3, 4}:
-                ar = [self.id, self.width, self.width, self.x, self.y]
-                for i in range(min(len(args), 5)):
+            elif len(args) in {2, 3}:
+                ar = [self.id, self.width, self.x, self.y]
+                for i in range(min(len(args), 4)):
                     ar[i] = args[i]
-                self.id, self.width, self.width, self.x, self.y = ar
-            elif len(args) == 5:
-                self.id, self.width, self.width, self.x, self.y = args
+                self.id, self.width, self.x, self.y = ar
+            elif len(args) == 4:
+                self.id, self.width, self.x, self.y = args
         else:
             for key, value in kwargs.items():
                 setattr(self, key, value)
