@@ -103,3 +103,16 @@ class Base:
                 self.y = args[4]
         for key in dictionary:
             setattr(self, key, dictionary[key])
+
+    @classmethod
+    def load_from_file(cls):
+        """Returns a list of instances from a JSON file"""
+        filename = cls.__name__ + ".json"
+        try:
+            with open(filename, "r") as f:
+                data = f.read()
+                list_dicts = cls.from_json_string(data)
+                instances = [cls.create(**obj_dict) for obj_dict in list_dicts]
+                return instances
+        except FileNotFoundError:
+            return []
