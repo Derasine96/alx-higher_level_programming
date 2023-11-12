@@ -28,7 +28,7 @@ class Base:
         """
         import json
 
-        if list_dictionaries is None:
+        if list_dictionaries is None or list_dictionaries == []:
             return "[]"
         else:
             return json.dumps([obj.to_dictionary()
@@ -64,7 +64,7 @@ class Base:
             if isinstance(obj, cls):
                 return obj.to_dictionary()
             return obj
-        if list_objs is None:
+        if list_objs is None or json_string == "[]":
             return "[]"
         else:
             return json.dumps(list_objs, default=custom_encoder)

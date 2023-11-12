@@ -23,8 +23,8 @@ class Square(Rectangle):
 
     def __str__(self):
         """Return the str() representation of a Rectangle."""
-        return (f"[{self.__class__.__name__}] ({self.id}) "
-                f"{self.x}/{self.y} - {self.width}")
+        return "[Square] ({}) {}/{} - {}".format(
+            self.id, self.x, self.y, self.width)
 
     @property
     def size(self):

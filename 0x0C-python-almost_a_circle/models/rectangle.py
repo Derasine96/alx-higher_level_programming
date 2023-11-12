@@ -72,13 +72,13 @@ class Rectangle(Base):
 
     def area(self):
         """Return the current area of the rectangle."""
-        return self.__width * self.__height
+        return self.width * self.height
 
     def display(self):
         """Prints in stdout the Rectangle instance"""
-        print('\n' * self.__y, end="")
-        for _ in range(self.__height):
-            print(' ' * self.__x + '#' * self.__width)
+        print('\n' * self.y, end="")
+        for _ in range(self.height):
+            print(' ' * self.x + '#' * self.width)
 
     def update(self, *args, **kwargs):
         """Assigns an argument to each attribute"""
@@ -86,29 +86,29 @@ class Rectangle(Base):
             if len(args) == 1:
                 self.id = args[0]
             elif len(args) in {2, 3, 4}:
-                ar = [self.id, self.__width, self.__height, self.__x, self.__y]
+                attr = [self.id, self.width, self.height, self.x, self.y]
                 for i in range(min(len(args), 5)):
-                    ar[i] = args[i]
-                self.id, self.__width, self.__height, self.__x, self.__y = ar
+                    attr[i] = args[i]
+                self.id, self.width, self.height, self.x, self.y = attr
             elif len(args) == 5:
-                self.id, self.__width, self.__height, self.__x, self.__y = args
+                self.id, self.width, self.height, self.x, self.y = args
         else:
             for key, value in kwargs.items():
                 setattr(self, key, value)
 
     def __str__(self):
         """Return the str() representation of a Rectangle."""
-        return (f"[{self.__class__.__name__}] ({self.id}) "
-                f"{self.__x}/{self.__y} - {self.__width}/{self.__height}")
+        return "[Rectangle] ({}) {}/{} - {}/{}".format(
+            self.id, self.x, self.y, self.width, self.height)
 
     def to_dictionary(self):
         """Returns the dictionary representation of a Rectangle"""
         rect_dict = {}
         rect_dict['id'] = self.id
-        rect_dict['width'] = self.__width
-        rect_dict['height'] = self.__height
-        rect_dict['x'] = self.__x
-        rect_dict['y'] = self.__y
+        rect_dict['width'] = self.width
+        rect_dict['height'] = self.height
+        rect_dict['x'] = self.x
+        rect_dict['y'] = self.y
         return rect_dict
 
     @classmethod
