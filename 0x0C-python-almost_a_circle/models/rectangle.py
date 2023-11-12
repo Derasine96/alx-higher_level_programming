@@ -110,3 +110,15 @@ class Rectangle(Base):
         rect_dict['x'] = self.__x
         rect_dict['y'] = self.__y
         return rect_dict
+
+    @classmethod
+    def create(cls, **dictionary):
+        """Returns an instance with all attributes already set"""
+        dummy_object = cls(1, 1)
+        dummy_object.update(**dictionary)
+        return dummy_object
+
+    def update(self, *args, **dictionary):
+        """Update self's attributes using kwargs or args"""
+        for key in dictionary:
+            setattr(self, key, dictionary[key])
