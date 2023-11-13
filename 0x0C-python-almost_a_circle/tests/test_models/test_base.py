@@ -1,140 +1,98 @@
 #!/usr/bin/python3
-# test_base.py
-"""Defines unittests for base.py."""
-import os
+""" Module for test Base class """
 import unittest
-import inspect
 from models.base import Base
-from models.rectangle import Rectangle
 from models.square import Square
+from models.rectangle import Rectangle
+from io import StringIO
+from unittest import TestCase
+from unittest.mock import patch
+import os
+import sys
 
 
-class TestBase(unittest.TestCase):
-    """Tests the Base class."""
+class TestBaseMethods(unittest.TestCase):
+    """ Suite to test Base class """
 
     def setUp(self):
-        self.test = Base()
-
-    def tearDown(self):
-        del self.test
-
-    def test_init(self):
-        """Checks that a new instance of Base has no unexpected attr."""
-        self.assertFalse(hasattr(self.test, 'name'))
-        self.assertFalse(hasattr(self.test, 'other_attribute'))
-
-    def test_pep8_tests(self):
-        """Tests for pep8 tests"""
-        self.assertIsNotNone(Base.__doc__)
-        self.assertIs(hasattr(Base, "__init__"), True)
-        self.assertIsNotNone(Base.__init__.__doc__)
-        self.assertIs(hasattr(Base, "create"), True)
-        self.assertIsNotNone(Base.create.__doc__)
-        self.assertIs(hasattr(Base, "to_json_string"), True)
-        self.assertIsNotNone(Base.to_json_string.__doc__)
-        self.assertIs(hasattr(Base, "from_json_string"), True)
-        self.assertIsNotNone(Base.from_json_string.__doc__)
-        self.assertIs(hasattr(Base, "save_to_file"), True)
-        self.assertIsNotNone(Base.save_to_file.__doc__)
-        self.assertIs(hasattr(Base, "load_from_file"), True)
-        self.assertIsNotNone(Base.load_from_file.__doc__)
-
-    def test_docstring(self):
-        """Checks if docstrings are defined correctly."""
-        self.assertTrue(
-            inspect.getdoc(Rectangle.__init__) and
-            inspect.getdoc(Square.__init__)
-        ) is not None, "Missing docstring in file!"
-
-    def test_setattr(self):
-        """Checks that setting an attribute raises AttributeError."""
-        with self.assertRaises(AttributeError) as context:
-            self.test.name = 'Chidera'
-        self.assertTrue('can\'t set attribute' in str(context.exception))
-
-    def test_get_shape(self):
-        """Checks that get_shape returns None when there is no shape."""
-        self.assertIsNone(self.test.get_shape())
+        """ Method invoked for each test """
+        Base._Base__nb_objects = 0
 
     def test_id(self):
-        """Test check for id"""
-        Base._Base__nb_objects = 0
-        b1 = Base()
-        b2 = Base()
-        b3 = Base()
-        b4 = Base(12)
-        b5 = Base()
-        self.assertEqual(b1.id, 1)
-        self.assertEqual(b2.id, 2)
-        self.assertEqual(b3.id, 3)
-        self.assertEqual(b4.id, 12)
-        self.assertEqual(b5.id, 4)
+        """ Test assigned id """
+        new = Base(1)
+        self.assertEqual(new.id, 1)
 
-    def test_rectangle(self):
-        """Test check for rectangle"""
-        R1 = Rectangle(4, 5, 6)
-        R1_dict = R1.to_dictionary()
-        R2 = Rectangle.create(**R1_dict)
-        self.assertNotEqual(R1, R2)
+    def test_id_default(self):
+        """ Test default id """
+        new = Base()
+        self.assertEqual(new.id, 1)
 
-    def test_square(self):
-        """Test check for square creation"""
-        S1 = Square(44, 55, 66, 77)
-        S1_dict = S1.to_dictionary()
-        S2 = Rectangle.create(**S1_dict)
-        self.assertNotEqual(S1, S2)
+    def test_id_nb_objects(self):
+        """ Test nb object attribute """
+        new = Base()
+        new2 = Base()
+        new3 = Base()
+        self.assertEqual(new.id, 1)
+        self.assertEqual(new2.id, 2)
+        self.assertEqual(new3.id, 3)
 
-    def test_file_rectangle(self):
-        """Test check if file loads from rectangle"""
-        R1 = Rectangle(33, 34, 35, 26)
-        R2 = Rectangle(202, 2)
-        lR = [R1, R2]
-        Rectangle.save_to_file(lR)
-        lR2 = Rectangle.load_from_file()
-        self.assertNotEqual(lR, lR2)
+    def test_id_mix(self):
+        """ Test nb object attributes and assigned id """
+        new = Base()
+        new2 = Base(1024)
+        new3 = Base()
+        self.assertEqual(new.id, 1)
+        self.assertEqual(new2.id, 1024)
+        self.assertEqual(new3.id, 2)
 
-    def test_file_square(self):
-        """Test check if file loads from square"""
-        S1 = Square(22)
-        S2 = Square(44, 44, 55, 66)
-        lS = [S1, S2]
-        Square.save_to_file(lS)
-        lS2 = Square.load_from_file()
-        self.assertNotEqual(lS, lS2)
+    def test_string_id(self):
+        """ Test string id """
+        new = Base('1')
+        self.assertEqual(new.id, '1')
 
-    def test_from_json_string(self):
-        """Test check from json string"""
-        s = '{"name": "test", "type": "Rectangle",  "width": 20, "height": 30}'
-        r = Rectangle.from_json_string(s)
-        self.assertIsInstance(r, Rectangle)
-        self.assertTrue(hasattr(r, '__dict__'))
-        self.assertIn('name', r.__dict__.keys())
-        self.assertIn('type', r.__dict__.keys())
-        self.assertIn('width', r.__dict__.keys())
-        self.assertIn('height', r.__dict__.keys())
-        self.assertEqual(r.name, 'test')
-        self.assertEqual(r.type, 'Rectangle')
-        self.assertEqual(r.width, 20)
-        self.assertEqual(r.height, 30)
+    def test_more_args_id(self):
+        """ Test passing more args to init method """
+        with self.assertRaises(TypeError):
+            new = Base(1, 1)
 
-    def test_from_json_list(self):
-        """Test check from json list of rectangles and squares"""
-        s = '{"id": 1, "type": "Rectangle", "width": 20, "height": 30, "x": 1, "y": 1}'
-        r = Rectangle.from_json_string(s)
-        self.assertIsInstance(r, Rectangle)
-        self.assertTrue(hasattr(r, '__dict__'))
-        self.assertIn('id', r.__dict__.keys())
-        self.assertIn('type', r.__dict__.keys())
-        self.assertIn('width', r.__dict__.keys())
-        self.assertIn('height', r.__dict__.keys())
-        self.assertIn('x', r.__dict__.keys())
-        self.assertIn('y', r.__dict__.keys())
-        self.assertEqual(r.type, 'Rectangle')
-        self.assertEqual(r.width, 20)
-        self.assertEqual(r.height, 30)
-        self.assertEqual(r.x, 1)
-        self.assertEqual(r.y, 1)
+    def test_access_private_attrs(self):
+        """ Test accessing to private attributes """
+        new = Base()
+        with self.assertRaises(AttributeError):
+            new.__nb_objects
 
-if __name__ == "__main__":
-    # Run all tests if this file was run directly
-    unittest.main()
+    def test_save_to_file_1(self):
+        """ Test JSON file """
+        Square.save_to_file(None)
+        res = "[]\n"
+        with open("Square.json", "r") as file:
+            with patch('sys.stdout', new=StringIO()) as str_out:
+                print(file.read())
+                self.assertEqual(str_out.getvalue(), res)
+
+        try:
+            os.remove("Square.json")
+        except Exception:
+            pass
+
+        Square.save_to_file([])
+        with open("Square.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
+
+    def test_save_to_file_2(self):
+        """ Test JSON file """
+        Rectangle.save_to_file(None)
+        res = "[]\n"
+        with open("Rectangle.json", "r") as file:
+            with patch('sys.stdout', new=StringIO()) as str_out:
+                print(file.read())
+                self.assertEqual(str_out.getvalue(), res)
+        try:
+            os.remove("Rectangle.json")
+        except Exception:
+            pass
+
+        Rectangle.save_to_file([])
+        with open("Rectangle.json", "r") as file:
+            self.assertEqual(file.read(), "[]")
