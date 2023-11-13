@@ -82,19 +82,17 @@ class Rectangle(Base):
 
     def update(self, *args, **kwargs):
         """Assigns an argument to each attribute"""
+        if kwargs:
+            for key, value in kwargs.items():
+                setattr(self, key, value)
         if args:
             if len(args) == 1:
                 self.id = args[0]
             elif len(args) in {2, 3, 4}:
-                attr = [self.id, self.width, self.height, self.x, self.y]
+                ar = [self.id, self.width, self.height, self.x, self.y]
                 for i in range(min(len(args), 5)):
-                    attr[i] = args[i]
-                self.id, self.width, self.height, self.x, self.y = attr
-            elif len(args) == 5:
-                self.id, self.width, self.height, self.x, self.y = args
-        else:
-            for key, value in kwargs.items():
-                setattr(self, key, value)
+                    ar[i] = args[i]
+                self.id, self.width, self.height, self.x, self.y = ar
 
     def __str__(self):
         """Return the str() representation of a Rectangle."""
@@ -117,8 +115,3 @@ class Rectangle(Base):
         dummy_object = cls(1, 1)
         dummy_object.update(**dictionary)
         return dummy_object
-
-    def update(self, *args, **dictionary):
-        """Update self's attributes using kwargs or args"""
-        for key in dictionary:
-            setattr(self, key, dictionary[key])
