@@ -65,10 +65,13 @@ class Base:
         Args:
             **dictionary (dict): Key/value pairs of attributes to init.
         """
-        if dictionary:
-            dummy = cls(1, 1) if cls.__name__ == "Rectangle" else cls(1)
-            dummy.update(**dictionary)
-            return dummy
+        if dictionary and dictionary != {}:
+            if cls.__name__ == "Rectangle":
+                instance = cls(1, 1)
+            else:
+                instance = cls(1)
+            instance.update(**dictionary)
+            return instance
 
     @classmethod
     def load_from_file(cls):
