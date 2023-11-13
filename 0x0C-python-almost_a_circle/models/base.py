@@ -88,9 +88,9 @@ class Base:
         Args:
             **dictionary (dict): Key/value pairs of attributes to init.
         """
-    dummy = cls(1, 1) if cls.__name__ == "Rectangle" else cls(1)
-    dummy.update(**dictionary)
-    return dummy
+        dummy = cls(1, 1) if cls.__name__ == "Rectangle" else cls(1)
+        dummy.update(**dictionary)
+        return dummy
 
     def update(self, *args, **dictionary):
         """Update self's attributes using kwargs or args"""
