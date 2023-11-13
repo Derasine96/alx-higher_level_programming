@@ -18,7 +18,7 @@ class TestBase(unittest.TestCase):
     def tearDown(self):
         del self.test
 
-        def test_init(self):
+    def test_init(self):
         """Checks that a new instance of Base has no unexpected attr."""
         self.assertFalse(hasattr(self.test, 'name'))
         self.assertFalse(hasattr(self.test, 'other_attribute'))
@@ -45,13 +45,6 @@ class TestBase(unittest.TestCase):
             inspect.getdoc(Rectangle.__init__) and
             inspect.getdoc(Square.__init__)
         ) is not None, "Missing docstring in file!"
-
-    def test_init(self):
-        """Checks that a new instance of Base has no attributes."""
-        with self.assertRaises(AttributeError) as context:
-            self.test.__dict__['name'] = 'Chidera'
-        self.assertTrue('\'Base\' object has no attribute \'name\''
-                        in str(context.exception))
 
     def test_setattr(self):
         """Checks that setting an attribute raises AttributeError."""
@@ -126,24 +119,21 @@ class TestBase(unittest.TestCase):
 
     def test_from_json_list(self):
         """Test check from json list of rectangles and squares"""
-        s = ('[{"name": "test", "type": "Rectangle", "width": 20,'
-             '{"height": 30}, {"name": "test2", "type": "Square"}]')
-        lR = Rectangle.from_json_list(s)
-        self.assertIsInstance(lR, list)
-        self.assertEqual(len(lR), 2)
-        for i in range(len(lR)):
-            self.assertIsInstance(lR[i], Rectangle)
-            self.assertTrue(hasattr(lR[i], '__dict__'))
-            self.assertIn('name', lR[i].__dict__.keys())
-            self.assertIn('type', lR[i].__dict__.keys())
-            self.assertIn('width', lR[i].__dict__.keys())
-            self.assertIn('height', lR[i].__dict__.keys())
-            self.assertEqual(lR[i].name, 'test')
-            self.assertEqual(lR[i].type, 'Rectangle')
-            self.assertEqual(lR[i].width, 20)
-            self.assertEqual(lR[i].height, 30)
-            self.assertEqual(lR[i].side, None)
-
+        s = '{"id": 1, "type": "Rectangle", "width": 20, "height": 30, "x": 1, "y": 1}'
+        r = Rectangle.from_json_string(s)
+        self.assertIsInstance(r, Rectangle)
+        self.assertTrue(hasattr(r, '__dict__'))
+        self.assertIn('id', r.__dict__.keys())
+        self.assertIn('type', r.__dict__.keys())
+        self.assertIn('width', r.__dict__.keys())
+        self.assertIn('height', r.__dict__.keys())
+        self.assertIn('x', r.__dict__.keys())
+        self.assertIn('y', r.__dict__.keys())
+        self.assertEqual(r.type, 'Rectangle')
+        self.assertEqual(r.width, 20)
+        self.assertEqual(r.height, 30)
+        self.assertEqual(r.x, 1)
+        self.assertEqual(r.y, 1)
 
 if __name__ == "__main__":
     # Run all tests if this file was run directly
