@@ -83,7 +83,11 @@ class Base:
 
     @classmethod
     def create(cls, **dictionary):
-        """Returns an instance with all attributes already set"""
+        """Returns an instance with all attributes already set
+
+        Args:
+            **dictionary (dict): Key/value pairs of attributes to init.
+        """
         if dictionary and dictionary != {}:
             if cls.__name__ == "Rectangle":
                 dummy = cls(1, 1)
