@@ -99,6 +99,8 @@ class Rectangle(Base):
                 for i in range(min(len(args), 5)):
                     ar[i] = args[i]
                 self.id, self.width, self.height, self.x, self.y = ar
+            elif len(args) == 5:
+                self.id, self.width, self.height, self.x, self.y = args
 
     def __str__(self):
         """Return the str() representation of a Rectangle."""
