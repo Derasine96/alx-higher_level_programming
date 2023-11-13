@@ -26,7 +26,6 @@ class Base:
         Args:
             list_dictionaries (list): List of dictionaries.
         """
-
         if list_dictionaries is None or list_dictionaries == []:
             return "[]"
         else:
@@ -39,7 +38,6 @@ class Base:
         Args:
             list_objs (list): List of instances.
         """
-
         filename = cls.__name__ + ".json"
         with open(filename, "w") as jsonfile:
             if list_objs is None:
@@ -71,22 +69,6 @@ class Base:
             dummy = cls(1, 1) if cls.__name__ == "Rectangle" else cls(1)
             dummy.update(**dictionary)
             return dummy
-
-    def update(self, *args, **dictionary):
-        """Update self's attributes using kwargs or args"""
-        if args:
-            if len(args) >= 1:
-                self.id = args[0]
-            if len(args) >= 2:
-                self.width = args[1]
-            if len(args) >= 3:
-                self.height = args[2]
-            if len(args) >= 4:
-                self.x = args[3]
-            if len(args) >= 5:
-                self.y = args[4]
-        for key in dictionary:
-            setattr(self, key, dictionary[key])
 
     @classmethod
     def load_from_file(cls):
