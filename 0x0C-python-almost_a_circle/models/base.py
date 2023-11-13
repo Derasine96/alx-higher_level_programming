@@ -65,15 +65,13 @@ class Base:
         Args:
             **dictionary (dict): Key/value pairs of attributes to init.
         """
-        from models.rectangle import Rectangle
-        from models.square import Square
-
-        if cls.__name__ == "Rectangle":
-            instance = Rectangle(1, 1)
-        elif cls.__name__ == "Square":
-            instance = Square(2)
-        instance.update(**dictionary)
-        return (instance)
+        if dictionary:
+            if cls.__name__ == "Rectangle":
+                new_instance = cls(2, 2)
+            else:
+                new_instance = cls(2)
+            new_instance.update(**dictionary)
+            return new_instance
 
     @classmethod
     def load_from_file(cls):

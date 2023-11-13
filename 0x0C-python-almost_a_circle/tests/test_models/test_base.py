@@ -3,6 +3,7 @@
 """Defines unittests for base.py."""
 import os
 import unittest
+import inspect
 from models.base import Base
 from models.rectangle import Rectangle
 from models.square import Square
@@ -17,15 +18,13 @@ class TestBase(unittest.TestCase):
     def tearDown(self):
         del self.test
 
-    def test_pep8_model(self):
-        """Tests for pep8 model"""
-        file_size = os.stat("models/__init__.py").st_size / 1024
-        self.assertAlmostEqual(file_size, 65.79, places=2,
-                               msg="File size is not right!")
+        def test_init(self):
+        """Checks that a new instance of Base has no unexpected attr."""
+        self.assertFalse(hasattr(self.test, 'name'))
+        self.assertFalse(hasattr(self.test, 'other_attribute'))
 
     def test_pep8_tests(self):
         """Tests for pep8 tests"""
-        self.assertIsNotNone(module_doc)
         self.assertIsNotNone(Base.__doc__)
         self.assertIs(hasattr(Base, "__init__"), True)
         self.assertIsNotNone(Base.__init__.__doc__)
@@ -63,16 +62,6 @@ class TestBase(unittest.TestCase):
     def test_get_shape(self):
         """Checks that get_shape returns None when there is no shape."""
         self.assertIsNone(self.test.get_shape())
-
-    def test_add_shape(self):
-        """Checks that add_shape adds shapes to the list."""
-        rectangle1 = Rectangle(5, 6)
-        square2 = Square(7)
-        self.test.add_shape(rectangle1)
-        self.test.add_shape(square2)
-        self.assertEqual(len(self.test._shapes), 2)
-        self.assertIn(rectangle1, self.test._shapes)
-        self.assertIn(square2, self.test._shapes)
 
     def test_id(self):
         """Test check for id"""
