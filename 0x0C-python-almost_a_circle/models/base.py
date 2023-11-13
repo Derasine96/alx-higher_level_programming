@@ -26,13 +26,11 @@ class Base:
         Args:
             list_dictionaries (list): List of dictionaries.
         """
-        import json
 
         if list_dictionaries is None or list_dictionaries == []:
             return "[]"
         else:
-            return json.dumps([obj.to_dictionary()
-                              for obj in list_dictionaries])
+            return json.dumps(list_dictionaries)
 
     @classmethod
     def save_to_file(cls, list_objs):
@@ -41,7 +39,6 @@ class Base:
         Args:
             list_objs (list): List of instances.
         """
-        import json
 
         filename = cls.__name__ + ".json"
 
