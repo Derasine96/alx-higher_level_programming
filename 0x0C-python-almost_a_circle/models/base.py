@@ -64,7 +64,7 @@ class Base:
             if isinstance(obj, cls):
                 return obj.to_dictionary()
             return obj
-        if list_objs is None or list_objs == "[]":
+        if list_objs is None:
             return "[]"
         else:
             return json.dumps(list_objs, default=custom_encoder)
