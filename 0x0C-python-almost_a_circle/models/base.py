@@ -65,6 +65,9 @@ class Base:
         Args:
             **dictionary (dict): Key/value pairs of attributes to init.
         """
+        from models.rectangle import Rectangle
+        from models.square import Square
+
         if dictionary and dictionary != {}:
             if cls.__name__ == "Rectangle":
                 instance = cls(1, 1)
