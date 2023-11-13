@@ -68,13 +68,12 @@ class Base:
         from models.rectangle import Rectangle
         from models.square import Square
 
-        if dictionary and dictionary != {}:
-            if cls.__name__ == "Rectangle":
-                instance = cls(1, 1)
-            else:
-                instance = cls(1)
-            instance.update(**dictionary)
-            return instance
+        if cls.__name__ == "Rectangle":
+            instance = Rectangle(1, 1)
+        elif cls.__name__ == "Square":
+            instance = Square(2)
+        instance.update(**dictionary)
+        return (instance)
 
     @classmethod
     def load_from_file(cls):
