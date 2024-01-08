@@ -10,6 +10,6 @@ if (isNaN(square)) {
     for (let j = 0; j < square; j++) {
       row += 'X';
     }
-      console.log(row);
+    console.log(row);
   }
 }
