@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/node
 const num = process.argv.slice(2).map(Number);
 
 let max = 0;
