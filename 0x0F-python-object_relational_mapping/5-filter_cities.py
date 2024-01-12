@@ -14,7 +14,7 @@ if __name__ == "__main__":
         "SELECT cities.id, cities.name, states.name "
         "FROM cities "
         "INNER JOIN states ON states.id=cities.state_id "
-        "WHERE cities.name LIKE BINARY %s"
+        "WHERE states.name LIKE BINARY %s"
         )
     cur.execute(query, (sys.argv[4],))
     rows = cur.fetchall()
