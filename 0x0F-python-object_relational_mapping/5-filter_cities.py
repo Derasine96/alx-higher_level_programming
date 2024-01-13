@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-    Script that lists all cities of a specific state from the database hbtn_0e_4_usa
+    Script that list all cities of a specific state from database hbtn_0e_4_usa
     Usage: ./0-select_states.py sys.argv[1] sys.argv[2] hbtn_0e_0_usa
 """
 import MySQLdb
@@ -13,7 +13,8 @@ if __name__ == "__main__":
     cur = db.cursor()
     cur.execute("SELECT cities.name FROM cities "
                 "INNER JOIN states ON cities.state_id = states.id "
-                "WHERE states.name = %s ORDER BY cities.id ASC", (sys.argv[4],))
+                "WHERE states.name = %s "
+                "ORDER BY cities.id ASC", (sys.argv[4],))
     rows = cur.fetchall()
     cities = list(row[0] for row in rows)
     print(sep=", ", *cities)
