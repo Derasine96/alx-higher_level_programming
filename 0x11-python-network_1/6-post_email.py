@@ -7,8 +7,9 @@ import requests
 import sys
 
 
-url = sys.argv[1]
-email = sys.argv[2]
-values = {'email': email}
-r = requests.post(url, values)
-print(r.text)
+if __name__ == "__main__":
+    url = sys.argv[1]
+    email = sys.argv[2]
+    values = {'email': email}
+    r = requests.post(url, values)
+    print(r.text)
