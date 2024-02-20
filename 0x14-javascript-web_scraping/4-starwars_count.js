@@ -1,15 +1,14 @@
 #!/usr/bin/node
 const request = require('request');
-const apiUrl = process.argvr[2];
-const characterId = 18;
+const apiUrl = process.argv[2];
 
-const requestUrl = `${apiUrl}?search=${characterId}`;
-request(requestUrl, function (error, response, body) {
+request(apiUrl, function (error, response, body) {
   if (error) {
     console.error(error);
     return;
   }
-  const data = JSON.parse(body);
-  const films = data.films || [];
-  console.log(`${films.length}`);
+  const count = JSON.parse(body).results.reduce((count, movie) => {
+    return movie.characters.some(character => character.endsWith('/18/')) ? count + 1 : count;
+  }, 0);
+  console.log(count);
 });
